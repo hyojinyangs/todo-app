@@ -1,0 +1,20 @@
+/**
+ * CalendarView Styles - Apple Design
+ */
+
+.calendar-view {
+  background: var(--surface-color);
+  backdrop-filter: blur(40px);
+  border-radius: var(--radius-xl);
+  border: 0.5px solid var(--border-color);
+  padding: var(--space-6);
+  margin-bottom: var(--space-8);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .calendar-view {
+    padding: var(--space-4);
+  }
+}

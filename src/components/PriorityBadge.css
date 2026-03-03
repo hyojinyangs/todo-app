@@ -1,0 +1,88 @@
+/**
+ * PriorityBadge Styles - Apple Design
+ */
+
+.priority-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.priority-badge-emoji {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.priority-badge-text {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+}
+
+/* High priority badge */
+.priority-badge--high {
+  background: rgba(255, 59, 48, 0.12);
+  color: #FF3B30;
+}
+
+.priority-badge--high:hover:not(:disabled):not(.priority-badge--readonly) {
+  background: rgba(255, 59, 48, 0.20);
+  transform: scale(1.05);
+  box-shadow: 0 2px 4px rgba(255, 59, 48, 0.2);
+}
+
+/* Medium priority badge */
+.priority-badge--medium {
+  background: rgba(255, 204, 0, 0.12);
+  color: #D99F00;
+}
+
+.priority-badge--medium:hover:not(:disabled):not(.priority-badge--readonly) {
+  background: rgba(255, 204, 0, 0.20);
+  transform: scale(1.05);
+  box-shadow: 0 2px 4px rgba(255, 204, 0, 0.2);
+}
+
+/* Low priority badge */
+.priority-badge--low {
+  background: rgba(0, 122, 255, 0.12);
+  color: #007AFF;
+}
+
+.priority-badge--low:hover:not(:disabled):not(.priority-badge--readonly) {
+  background: rgba(0, 122, 255, 0.20);
+  transform: scale(1.05);
+  box-shadow: 0 2px 4px rgba(0, 122, 255, 0.2);
+}
+
+/* Active state */
+.priority-badge:active:not(:disabled):not(.priority-badge--readonly) {
+  transform: scale(0.95);
+}
+
+/* Readonly state (for completed todos) */
+.priority-badge--readonly {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Disabled state */
+.priority-badge:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Focus state */
+.priority-badge:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}

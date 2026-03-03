@@ -1,0 +1,172 @@
+/**
+ * App Layout Styles
+ *
+ * Main application container and layout structure.
+ */
+
+/* ==========================================
+   App Layout
+   ========================================== */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-6);
+  padding-top: var(--space-10);
+}
+
+/* ==========================================
+   Main Container
+   ========================================== */
+
+.todo-container {
+  width: 100%;
+  max-width: 600px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.04),
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 20px 40px rgba(0, 0, 0, 0.04);
+  padding: var(--space-10);
+  animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   Loading State
+   ========================================== */
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12);
+  color: var(--text-secondary);
+  font-size: var(--font-size-lg);
+}
+
+/* ==========================================
+   Footer
+   ========================================== */
+
+.app-footer {
+  margin-top: var(--space-8);
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.app-footer p {
+  margin: var(--space-1) 0;
+}
+
+/* ==========================================
+   Date Filter Indicator
+   ========================================== */
+
+.date-filter-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--primary-light);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-4);
+  border: 1px solid var(--primary-color);
+}
+
+.date-filter-text {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.date-filter-clear {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--primary-color);
+  background: transparent;
+  border: 1px solid var(--primary-color);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.date-filter-clear:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.date-filter-clear:active {
+  transform: scale(0.95);
+}
+
+/* ==========================================
+   Responsive Adjustments
+   ========================================== */
+
+@media (max-width: 600px) {
+  .app {
+    padding: var(--space-4);
+    padding-top: var(--space-6);
+  }
+
+  .todo-container {
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+  }
+}
+
+@media (max-width: 400px) {
+  .todo-container {
+    padding: var(--space-4);
+  }
+}
+
+/* ==========================================
+   Print Styles
+   ========================================== */
+
+@media print {
+  .app {
+    background: white;
+    padding: 0;
+  }
+
+  .todo-container {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    max-width: 100%;
+  }
+
+  .todo-input-form,
+  .todo-item-actions,
+  .todo-filters,
+  .app-footer {
+    display: none;
+  }
+
+  .todo-item {
+    page-break-inside: avoid;
+  }
+}

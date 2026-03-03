@@ -1,0 +1,37 @@
+/**
+ * TodoList Styles - Apple Design
+ */
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Empty state */
+.todo-list-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-16) var(--space-8);
+  text-align: center;
+}
+
+.todo-list-empty-icon {
+  width: 120px;
+  height: 120px;
+  color: var(--text-quaternary);
+  margin-bottom: var(--space-6);
+  opacity: 0.5;
+}
+
+.todo-list-empty-text {
+  color: var(--text-secondary);
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  margin: 0;
+  max-width: 300px;
+  line-height: 1.5;
+}

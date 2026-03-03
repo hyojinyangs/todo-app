@@ -1,0 +1,121 @@
+/**
+ * TodoFilters Styles - Apple Design
+ */
+
+.todo-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  margin-top: var(--space-6);
+  background: var(--surface-muted);
+  border-radius: var(--radius-lg);
+  border: 0.5px solid var(--border-color);
+}
+
+.todo-filters-count {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.todo-filters-count strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.todo-filters-buttons {
+  display: flex;
+  gap: var(--space-1);
+  background: var(--surface-color);
+  padding: var(--space-1);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.todo-filter-button {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.todo-filter-button:hover {
+  color: var(--text-primary);
+  background: var(--surface-hover);
+}
+
+.todo-filter-button--active {
+  color: white;
+  background: var(--primary-color);
+  box-shadow: 0 1px 4px rgba(0, 122, 255, 0.3);
+}
+
+.todo-filter-button:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.todo-filters-actions {
+  min-width: 120px;
+  text-align: right;
+}
+
+.todo-clear-button {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--danger-color);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.todo-clear-button:hover {
+  background: var(--danger-light);
+  transform: scale(1.02);
+}
+
+.todo-clear-button:active {
+  transform: scale(0.98);
+}
+
+.todo-clear-button:focus-visible {
+  outline: 3px solid var(--danger-color);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .todo-filters {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .todo-filters-buttons {
+    justify-content: center;
+    order: -1;
+  }
+
+  .todo-filters-actions {
+    text-align: center;
+    min-width: auto;
+  }
+
+  .todo-filters-count {
+    order: 1;
+  }
+}

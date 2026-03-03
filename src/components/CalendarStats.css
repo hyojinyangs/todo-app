@@ -1,0 +1,53 @@
+/**
+ * CalendarStats Styles - Apple Design
+ */
+
+.calendar-stats {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--surface-muted);
+  border-radius: var(--radius-lg);
+  flex-wrap: wrap;
+}
+
+.calendar-stat {
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.calendar-stat-label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.calendar-stat-value {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .calendar-stats {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .calendar-stat {
+    min-width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .calendar-stat-value {
+    font-size: var(--font-size-lg);
+  }
+}

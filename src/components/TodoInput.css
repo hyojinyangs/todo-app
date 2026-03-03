@@ -1,0 +1,154 @@
+/**
+ * TodoInput Styles - Apple Design
+ */
+
+.todo-input-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.todo-input-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.todo-input {
+  flex: 1;
+  padding: var(--space-4);
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  border: 0.5px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--surface-color);
+  color: var(--text-primary);
+  transition: all var(--transition-normal);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.todo-input::placeholder {
+  color: var(--text-quaternary);
+}
+
+.todo-input:hover {
+  border-color: var(--border-hover);
+}
+
+.todo-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px var(--primary-light), 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.todo-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--surface-muted);
+}
+
+.todo-input-button {
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  color: white;
+  background: var(--primary-color);
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.2);
+}
+
+.todo-input-button:hover:not(:disabled) {
+  background: var(--primary-hover);
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.todo-input-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 122, 255, 0.2);
+}
+
+.todo-input-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--text-quaternary);
+  box-shadow: none;
+}
+
+.todo-input-button:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Date picker */
+.todo-date-picker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.todo-date-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.todo-date-input {
+  flex: 1;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  border: 0.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--surface-color);
+  color: var(--text-primary);
+  transition: all var(--transition-normal);
+}
+
+.todo-date-input:hover {
+  border-color: var(--border-hover);
+}
+
+.todo-date-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.todo-date-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--surface-muted);
+}
+
+/* Responsive: Stack on small screens */
+@media (max-width: 480px) {
+  .todo-date-picker {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .todo-date-label {
+    width: 100%;
+  }
+
+  .todo-date-input {
+    width: 100%;
+  }
+
+  .todo-input-row {
+    flex-direction: column;
+  }
+
+  .todo-input-button {
+    width: 100%;
+    padding: var(--space-4);
+  }
+}

@@ -1,0 +1,88 @@
+/**
+ * ErrorMessage Styles - Apple Design
+ */
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+  background: var(--danger-light);
+  border: 0.5px solid var(--danger-color);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 8px rgba(255, 59, 48, 0.12);
+  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-message-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--danger-color);
+}
+
+.error-message-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke-width: 2px;
+}
+
+.error-message-text {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--danger-dark);
+}
+
+.error-message-dismiss {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  color: var(--danger-color);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.error-message-dismiss:hover {
+  background: var(--danger-color);
+  color: white;
+  transform: scale(1.05);
+}
+
+.error-message-dismiss:active {
+  transform: scale(0.95);
+}
+
+.error-message-dismiss svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.5px;
+}
+
+.error-message-dismiss:focus-visible {
+  outline: 3px solid var(--danger-color);
+  outline-offset: 2px;
+}
