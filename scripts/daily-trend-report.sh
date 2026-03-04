@@ -71,13 +71,47 @@ else
     exit 1
 fi
 
+# Translate to Korean
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+log "Translating report to Korean..."
+KOREAN_REPORT_FILE="$REPORT_DIR/trend-report-$DATE-ko.md"
+"$SCRIPT_DIR/translate-to-korean.sh" "$REPORT_FILE" >> "$LOG_FILE" 2>&1
+
+if [ ! -s "$KOREAN_REPORT_FILE" ]; then
+    log "⚠️ Korean translation failed, proceeding with English only"
+    FINAL_REPORT="$REPORT_FILE"
+else
+    log "✅ Korean translation completed"
+
+    # Create bilingual report
+    log "Creating bilingual report..."
+    BILINGUAL_REPORT="$REPORT_DIR/trend-report-$DATE-bilingual.md"
+    "$SCRIPT_DIR/create-bilingual-report.sh" "$REPORT_FILE" "$KOREAN_REPORT_FILE" "$BILINGUAL_REPORT" >> "$LOG_FILE" 2>&1
+
+    if [ -s "$BILINGUAL_REPORT" ]; then
+        log "✅ Bilingual report created"
+        FINAL_REPORT="$BILINGUAL_REPORT"
+
+        # Create symlinks for all versions
+        ln -sf "$KOREAN_REPORT_FILE" "$REPORT_DIR/latest-ko.md"
+        ln -sf "$BILINGUAL_REPORT" "$REPORT_DIR/latest-bilingual.md"
+        log "✅ Symlinks created for Korean and bilingual versions"
+    else
+        log "⚠️ Bilingual merge failed, using English only"
+        FINAL_REPORT="$REPORT_FILE"
+    fi
+fi
+
+# Update main symlink with final report (bilingual if available, else English)
+ln -sf "$REPORT_FILE" "$REPORT_DIR/latest-en.md"
+ln -sf "$FINAL_REPORT" "$REPORT_DIR/latest.md"
+
 log "Daily trend report generation complete."
 
 # Send to Notion
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 if [ -f "$SCRIPT_DIR/notion-helper-complete.cjs" ] && [ -n "$NOTION_API_KEY" ] && [ -n "$NOTION_DATABASE_ID" ]; then
     log "Sending complete report to Notion..."
-    node "$SCRIPT_DIR/notion-helper-complete.cjs" "$REPORT_FILE" >> "$LOG_FILE" 2>&1
+    node "$SCRIPT_DIR/notion-helper-complete.cjs" "$FINAL_REPORT" >> "$LOG_FILE" 2>&1
     if [ $? -eq 0 ]; then
         log "✅ Complete report sent to Notion successfully"
     else
@@ -90,6 +124,8 @@ fi
 # Cleanup old reports (keep last 30 days)
 log "Cleaning up old reports (keeping last 30 days)..."
 find "$REPORT_DIR" -name "trend-report-*.md" -type f -mtime +30 -delete
+find "$REPORT_DIR" -name "trend-report-*-ko.md" -type f -mtime +30 -delete
+find "$REPORT_DIR" -name "trend-report-*-bilingual.md" -type f -mtime +30 -delete
 find "$REPORT_DIR/logs" -name "*.log" -type f -mtime +30 -delete
 
 log "Cleanup complete."

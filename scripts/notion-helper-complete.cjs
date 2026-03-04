@@ -66,7 +66,15 @@ function markdownToNotionBlocks(markdown) {
                 blocks.push(createParagraph(currentParagraph));
                 currentParagraph = '';
             }
-            blocks.push(createHeading1(line.substring(2)));
+
+            // Check if it's a language section marker
+            const languageBlock = createLanguageSection(line.substring(2));
+            if (languageBlock) {
+                blocks.push(languageBlock);
+            } else {
+                // Otherwise process as regular heading
+                blocks.push(createHeading1(line.substring(2)));
+            }
         }
         else if (line.startsWith('## ') && !line.includes('###')) {
             if (currentParagraph) {
@@ -119,6 +127,28 @@ function markdownToNotionBlocks(markdown) {
     }
 
     return blocks.filter(b => b !== null);
+}
+
+// Detect language section headers and create callout blocks
+function createLanguageSection(text) {
+    const isEnglish = text.includes('🇺🇸') || text.includes('English Version');
+    const isKorean = text.includes('🇰🇷') || text.includes('한국어 버전');
+
+    if (isEnglish || isKorean) {
+        const cleaned = cleanText(text);
+        if (!cleaned || cleaned === '[removed]') return null;
+
+        return {
+            object: 'block',
+            type: 'callout',
+            callout: {
+                rich_text: [{ type: 'text', text: { content: cleaned } }],
+                icon: { type: 'emoji', emoji: isEnglish ? '🇺🇸' : '🇰🇷' },
+                color: isEnglish ? 'blue_background' : 'green_background'
+            }
+        };
+    }
+    return null;
 }
 
 function createHeading1(text) {
@@ -210,7 +240,7 @@ async function createPage(blocks) {
     const data = JSON.stringify({
         parent: { database_id: NOTION_DATABASE_ID },
         properties: {
-            Name: { title: [{ text: { content: `Daily Trend Report - ${date}` } }] },
+            Name: { title: [{ text: { content: `📊 Daily Trend Report - ${date} (EN/KO)` } }] },
             Date: { date: { start: date } }
         },
         children: blocks
